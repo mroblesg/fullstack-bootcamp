@@ -12,7 +12,7 @@ public class Main {
 	public static String path = "src/main/resources/files/books/input.txt";
 
 	public static void main(String[] args) {
-		//readFileDataLine();
+		readFileDataLine();
 		readFileDataParallel();
 	}
 

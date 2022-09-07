@@ -11,5 +11,6 @@
   	<module>spring-core</module>
   	<module>streams</module>
   	<module>streams-data</module>
+  	<module>spring-core2</module>
   </modules>
 </project>
