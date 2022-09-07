@@ -3,17 +3,20 @@ package fileHandler;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.util.List;
 import java.util.Scanner;
 
 public class Main {
 
 	public static String path = "src/main/resources/files/books/input.txt";
-	
+
 	public static void main(String[] args) {
-		readFileData();
+		//readFileDataLine();
+		readFileDataParallel();
 	}
 
-	private static void readFileData() {
+	private static void readFileDataLine() {
 		
 		try {
 			
@@ -27,10 +30,9 @@ public class Main {
 						System.out.println(line);
 					}
 				} else {
-					throw new FileNotFoundException("File is not accesible");
+					throw new IOException("File is not accesible");
 				}
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} finally {
 				reader.close();
@@ -39,9 +41,24 @@ public class Main {
 		} catch (FileNotFoundException e) {
 			System.out.println("File not Found");
 		}
-		
-		
-		
 	}
-	
+
+	private static void readFileDataParallel() {
+
+		File f = new File(path);
+
+		try {
+			if (f.canRead()) {
+
+				List<String> text = Files.readAllLines(f.toPath());
+				text.parallelStream().forEach((d) -> {System.out.println(d);});
+				
+			} else {
+				throw new IOException("File can't be read");
+			}
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 }
